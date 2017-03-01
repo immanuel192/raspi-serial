@@ -123,7 +123,7 @@ export class Serial extends Peripheral {
       }
       return;
     }
-    console.log(SerialPort);
+
     this.portInstance = new SerialPort(this.portId, {
       lock: false,
       baudRate: this.options.baudRate,
