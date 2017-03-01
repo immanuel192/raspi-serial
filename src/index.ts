@@ -50,7 +50,7 @@ export interface IErrorCallback {
 }
 
 function createEmptyCallback(cb?: ICallback): ICallback {
-  return function() {
+  return function () {
     if (cb) {
       cb();
     }
@@ -58,7 +58,7 @@ function createEmptyCallback(cb?: ICallback): ICallback {
 }
 
 function createErrorCallback(cb?: IErrorCallback): IErrorCallback {
-  return function(err: Error | string) {
+  return function (err: Error | string) {
     if (cb) {
       cb(err);
     }
@@ -123,12 +123,14 @@ export class Serial extends Peripheral {
       }
       return;
     }
+    console.log(SerialPort);
     this.portInstance = new SerialPort(this.portId, {
       lock: false,
       baudRate: this.options.baudRate,
       dataBits: this.options.dataBits,
       stopBits: this.options.stopBits,
-      parity: this.options.parity
+      parity: this.options.parity,
+      parser: SerialPort.parsers.readline('\r\n')
     });
     this.portInstance.on('open', () => {
       this.portInstance.on('data', (data) => {
